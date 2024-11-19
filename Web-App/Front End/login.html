@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login / Signup - Text-Based</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2 id="form-title">[ Login ]</h2>
+
+        <form id="auth-form">
+            <div class="form-group signup-only">
+                <label>[ First Name ]</label>
+                <input type="text" id="first-name" placeholder="__________" required>
+            </div>
+            <div class="form-group signup-only">
+                <label>[ Last Name ]</label>
+                <input type="text" id="last-name" placeholder="__________" required>
+            </div>
+            <div class="form-group">
+                <label>[ Email ]</label>
+                <input type="email" id="email" placeholder="__________" required>
+            </div>
+            <div class="form-group">
+                <label>[ Password ]</label>
+                <input type="password" id="password" placeholder="__________" required>
+            </div>
+            <button type="submit" id="submit-button">[ Login ]</button>
+        </form>
+
+        <p id="toggle-form">
+            Don’t have an account? <a href="#" id="toggle-link">[ Sign Up ]</a>
+        </p>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

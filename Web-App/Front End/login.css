@@ -1,0 +1,68 @@
+body {
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 20px; /* Add margin to the body */
+}
+
+.form-container {
+    border: 1px dashed black;
+    padding: 20px;
+    max-width: 400px;
+    text-align: left;
+    overflow: hidden; /* Ensure elements do not overflow their boxes */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px dashed black;
+    background: none;
+    color: inherit;
+    font-family: monospace;
+    font-size: 14px;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 8px;
+    border: 1px dashed black;
+    background: none;
+    font-size: 16px;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+button:hover {
+    background: none;
+    text-decoration: underline;
+}
+
+#toggle-form {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.signup-only {
+    display: none;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coeus AI - Text-Based Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</head>
+<body>
+    <!-- Remove the title -->
+    <!-- <h1>Coeus AI - Text-Based Dashboard</h1> -->
+
+    <!-- Navigation buttons -->
+    <div id="top-nav" style="margin: 20px;">
+        <!-- Remove the profile button -->
+        <!-- <span id="profile-btn" onclick="toggleProfile()">[Profile]</span> -->
+        <div id="profile-info">
+            <p>Username: John Doe</p>
+            <p>Email: johndoe@example.com</p>
+            <p>Member since: 01/01/2023</p>
+        </div>
+    </div>
+
+    <!-- Profile info pop-up -->
+    <div id="profile-info">
+        <p>Username: John Doe</p>
+        <p>Member since: 01/01/2023</p>
+        <!-- Add any other relevant profile details here -->
+    </div>
+
+    <div id="content">
+        <!-- Calendar Box with View Selector, Navigation, and Add Event Button -->
+        <div class="box" id="calendar" style="overflow: auto;">
+            <h2>Calendar</h2>
+            <div id="calendar-controls">
+                <!-- Add Event Button -->
+                <div class="add-btn" onclick="showInputField('calendar', 'event-container')">[ + ] Add Event</div>
+                <button id="prev-btn">&lt;</button>
+                <button id="today-btn">Today</button>
+                <button id="next-btn">&gt;</button>
+                <select id="calendar-view-select">
+                    <option value="day">Day View</option>
+                    <option value="week">Week View</option>
+                    <option value="month" selected>Month View</option>
+                </select>
+            </div>
+            <div id="calendar-content"></div>
+        </div>
+
+        <!-- Right Column for To-Do List and Habits Tracker -->
+        <div id="right-column">
+            <!-- To-Do List Box -->
+            <div class="box" id="todo-list" style="overflow: auto;">
+                <h2>To-Do List</h2>
+                <div id="task-container"></div>
+                <div class="add-btn" onclick="showInputField(taskContainer, 'task')">[ + ] Add Task</div>
+
+                <!-- New Completed Tasks Section -->
+                <div id="completed-tasks-section">
+                    <h3>Completed Tasks</h3>
+                    <div id="completed-tasks-container"></div>
+                    
+                    <!-- Link to Completed Tasks Page -->
+                    <a href="completed_tasks.html">
+                        <button>More</button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Habits Tracker Box -->
+            <div class="box" id="habits-tracker" style="overflow: auto;">
+                <h2>Habits</h2>
+                <div id="overall-progress-bar" class="overall-progress">Overall Progress: 0%</div>
+                <div id="habit-list"></div>
+                <div class="add-btn" onclick="showInputField(habitContainer, 'habit')">[ + ] Add Habit</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Modal -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span id="event-modal-close" class="close">&times;</span>
+            <h2>Add Event</h2>
+            <form id="event-form">
+                <label for="event-title">Title:</label>
+                <input type="text" id="event-title" required>
+                
+                <label for="event-date">Date:</label>
+                <input type="date" id="event-date" required>
+                
+                <label for="event-start-time">Start Time:</label>
+                <input type="time" id="event-start-time" required>
+                
+                <label for="event-end-time">End Time:</label>
+                <input type="time" id="event-end-time" required>
+                
+                <label for="event-description">Description:</label>
+                <textarea id="event-description"></textarea>
+                
+                <button type="button" id="event-modal-save" onclick="addCalendarEvent()">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

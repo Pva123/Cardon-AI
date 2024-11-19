@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Completed Tasks</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <h1>Completed Tasks</h1>
+    <div id="completed-tasks-container" style="margin: 20px; overflow: hidden;">
+        <label for="filter">Filter by:</label>
+        <select id="filter" onchange="filterTasks()">
+            <option value="allTime" selected>All Time</option> <!-- Added "All Time" as default option -->
+            <option value="day">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="week">This Week</option>
+            <option value="previousWeek">Previous Week</option>
+            <option value="month">This Month</option>
+            <option value="previousMonth">Previous Month</option>
+            <option value="custom">Custom</option>
+        </select>
+
+        <!-- Date range inputs for custom filtering -->
+        <div id="date-range" style="display: none;">
+            <label>Select Date Range: </label>
+            <input type="date" id="start-date" onchange="filterByDateRange()"> to 
+            <input type="date" id="end-date" onchange="filterByDateRange()">
+        </div>
+
+        <div id="filtered-tasks"></div>
+    </div>
+    <script src="./completed_tasks.js"></script>
+</body>
+</html>
