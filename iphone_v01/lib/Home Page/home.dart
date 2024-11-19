@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' as intl;
+
+//getting time
+DateTime currentTime = DateTime.now();
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -27,7 +31,7 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    '12:45',
+                    intl.DateFormat('EEE, MMM d, HH:mm').format(currentTime),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
