@@ -1,43 +1,23 @@
-# Coeus AI - Your Personal Productivity Companion
+# **Cardon AI - Your Personal Assistant and Productivity Companion**
 
-Welcome to Coeus AI (Customized Self-Assistant Intelligence), your ultimate productivity companion! Coeus AI isn't just another task manager or calendar app – it's a smart, intuitive assistant that understands you better than anyone else.
+Welcome to **Cardon AI** (Customized Self-Assistant Intelligence), your ultimate productivity partner! Cardon AI isn't just another task manager or calendar app—it's a smart, intuitive assistant designed to help you stay productive and organized every day.
 
-## Elevate Your Productivity with Coeus AI
+## **Current Functionality of Cardon AI (v0.1)**
 
-### Personalized Scheduling
-Coeus AI goes beyond basic scheduling. It learns your habits, analyzes your calendar, and optimizes your day with customized schedules tailored to your unique needs and preferences. Whether you're a night owl or an early bird, Coeus AI ensures you make the most of your time.
+### **1. Web App for Task, Habit, and Appointment Management**
+Cardon AI offers a **simple and intuitive web app** where users can manage their tasks, appointments, and habits—all in one place. It’s designed to be easy to use, keeping everything you need organized in one central hub.
 
-### Intelligent Notifications
-Say goodbye to generic reminders! Coeus AI sends smart notifications that are tailored to your schedule, mood, and productivity patterns. It factors in commute times, event schedules, and even tracks your energy levels to provide timely nudges and suggestions for optimal productivity.
+### **2. Personalized Scheduling**
+Cardon AI learns your habits and helps create a personalized schedule tailored to your unique preferences. Whether you're a night owl or an early riser, Cardon AI helps you optimize your day.
 
-### Mood Tracking and Wellness Suggestions
-Coeus AI cares about your well-being. It tracks your mood throughout the day and offers personalized recommendations to help you stay balanced and focused. Feeling stressed? Coeus AI might suggest a quick meditation session or a soothing playlist to help you unwind and recharge.
+### **3. Basic Notifications**
+Cardon AI provides **basic notifications** to remind you about important tasks and events. These reminders help you stay on track and keep your day organized without the overwhelming clutter of typical productivity tools.
 
-### Continuous Learning and Adaptation
-Coeus AI is always learning and evolving alongside you. It analyzes your feedback, adapts to your changing habits, and continuously refines its recommendations to better suit your needs. The more you interact with Coeus AI, the smarter and more personalized it becomes.
+## **Join the Productivity Revolution**
 
-## Experience the Future of Productivity
+Cardon AI is more than just a productivity tool—it’s a friendly assistant that helps you get things done without the overwhelm. Whether you're a student, a professional, or simply someone wanting to improve your productivity, Cardon AI is here to help you thrive.
 
-### Seamlessly Integrated Desktop Interface
-Coeus AI's sleek and intuitive desktop interface makes productivity effortless. Powered by Tkinter, Coeus AI's interface is designed for seamless interaction, allowing you to effortlessly manage your tasks, appointments, and wellness activities in one centralized hub.
+If you'd like to contribute or give feedback, we'd love your input!
 
-### Advanced Data Processing with SQL
-Under the hood, Coeus AI utilizes the power of SQL for lightning-fast data processing and management. Your personal data is securely stored and intelligently analyzed to generate meaningful insights and recommendations that empower you to reach your goals.
-
-## Getting Started (not ready yet)
-
-To embark on your productivity journey with Coeus AI, follow these simple steps:
-
-1. Clone the Coeus AI repository to your local machine.
-2. Install the necessary dependencies listed in the `requirements.txt` file.
-3. Set up your SQL database to store and manage your data securely.
-4. Launch Coeus AI's desktop interface by running the main Python script.
-5. Follow the on-screen prompts to configure Coeus AI and start receiving personalized productivity guidance tailored just for you.
-
-## Join the Productivity Revolution
-
-Coeus AI is more than just a productivity tool – it's a revolution in personal assistance. Join us in shaping the future of productivity and wellness. Whether you're a busy professional, a student with a packed schedule, or anyone looking to make the most of their time, Coeus AI is here to help you thrive.
-
-## License
-
-Coeus AI is a proprietary project developed by Parsa Vafaei, Mahyar Mahdavi and Henrique Miranda. All rights reserved.
+## **License**
+Cardon AI is a proprietary project developed by Parsa Vafaei, Mahyar Mahdavi, Henrique Miranda, and Arman Fathabadi. All rights reserved.
