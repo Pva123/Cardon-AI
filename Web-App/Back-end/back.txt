@@ -1,0 +1,18 @@
+To-do list:
+- Add a new schedule
+- Add a new task
+- Add a new note
+- Add a new reminder
+- Add a new event
+- Add a new contact
+- Add a new email
+- Add a new meeting
+- Add a new appointment
+- Add a new task
+- Add a new note
+- Add a new reminder
+- Add a new event
+- Add a new contact
+- Add a new email
+- Add a new meeting
+- Add a new appointment
