@@ -3,29 +3,28 @@ import 'package:flutter/material.dart';
 class NavButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
-  final Color? backgroundColor;
-  final Color? foregroundColor;
 
   const NavButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.onPressed,
-    this.backgroundColor,
-    this.foregroundColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
+    return TextButton(
       onPressed: onPressed,
-      style: OutlinedButton.styleFrom(
-        backgroundColor: backgroundColor ?? Colors.transparent,
-        side: BorderSide(
-          color: backgroundColor != null ? Colors.transparent : Colors.orange,
-        ),
-        foregroundColor: foregroundColor ?? Colors.orange,
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.black87,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
-      child: Text(label),
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
     );
   }
 }
