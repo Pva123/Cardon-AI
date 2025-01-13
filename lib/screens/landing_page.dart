@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../widgets/nav_button.dart';
-import '../widgets/faq_item.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
