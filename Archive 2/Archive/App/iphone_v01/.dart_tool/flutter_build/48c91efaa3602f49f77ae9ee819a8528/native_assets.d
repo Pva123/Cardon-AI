@@ -1,0 +1,1 @@
+ /Users/parsavafaei/Documents/Personal/Coeus\ AI/Coeus-AI/iphone_v01/.dart_tool/flutter_build/48c91efaa3602f49f77ae9ee819a8528/native_assets.yaml: 
