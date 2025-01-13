@@ -1,7 +1,7 @@
 -- Merging decision tree log ---
 application
-INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml:2:5-33:19
-INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml
+INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml:2:5-33:19
+INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml
 MERGED from [androidx.window:window:1.2.0] /Users/armanfathabadi/.gradle/caches/transforms-3/49ca8dca74d3fdc122073b7a5974c5d0/transformed/jetified-window-1.2.0/AndroidManifest.xml:22:5-29:19
 MERGED from [androidx.window:window:1.2.0] /Users/armanfathabadi/.gradle/caches/transforms-3/49ca8dca74d3fdc122073b7a5974c5d0/transformed/jetified-window-1.2.0/AndroidManifest.xml:22:5-29:19
 MERGED from [androidx.core:core:1.13.1] /Users/armanfathabadi/.gradle/caches/transforms-3/9560b4392b8a1575165d2e7541c36546/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
@@ -15,17 +15,17 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/armanfathabadi/.grad
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/armanfathabadi/.gradle/caches/transforms-3/b8c576ccb94d9689c95f1e0df7cf654c/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/armanfathabadi/.gradle/caches/transforms-3/b8c576ccb94d9689c95f1e0df7cf654c/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
 	android:extractNativeLibs
-		INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.13.1] /Users/armanfathabadi/.gradle/caches/transforms-3/9560b4392b8a1575165d2e7541c36546/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 	android:name
-		INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml
 manifest
-ADDED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml:1:1-45:12
-MERGED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml:1:1-45:12
-INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml:1:1-7:12
-INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml:1:1-7:12
-INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+ADDED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml:1:1-45:12
+MERGED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml:1:1-45:12
+INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 MERGED from [androidx.fragment:fragment:1.7.1] /Users/armanfathabadi/.gradle/caches/transforms-3/7799b48b7fd3b8774825c296dd579627/transformed/fragment-1.7.1/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.window:window:1.2.0] /Users/armanfathabadi/.gradle/caches/transforms-3/49ca8dca74d3fdc122073b7a5974c5d0/transformed/jetified-window-1.2.0/AndroidManifest.xml:17:1-31:12
 MERGED from [androidx.window:window-java:1.2.0] /Users/armanfathabadi/.gradle/caches/transforms-3/59bb600599ffc39d52050250ec56e1ed/transformed/jetified-window-java-1.2.0/AndroidManifest.xml:17:1-21:12
@@ -53,33 +53,33 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/armanfathabadi/.gr
 MERGED from [androidx.window.extensions.core:core:1.0.0] /Users/armanfathabadi/.gradle/caches/transforms-3/c31a4bb5a15a2ee7a96dbe06c89e85f5/transformed/jetified-core-1.0.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.getkeepsafe.relinker:relinker:1.4.5] /Users/armanfathabadi/.gradle/caches/transforms-3/0fa9983a94f45c67467302b3cea9a10d/transformed/jetified-relinker-1.4.5/AndroidManifest.xml:2:1-7:12
 	package
-		INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml:1:11-69
+		ADDED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml:1:11-69
 queries
-ADDED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml:39:5-44:15
+ADDED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml:39:5-44:15
 intent#action:name:android.intent.action.PROCESS_TEXT+data:mimeType:text/plain
-ADDED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml:40:9-43:18
+ADDED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml:40:9-43:18
 action#android.intent.action.PROCESS_TEXT
-ADDED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml:41:13-72
+ADDED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml:41:13-72
 	android:name
-		ADDED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml:41:21-70
+		ADDED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml:41:21-70
 data
-ADDED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml:42:13-50
+ADDED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml:42:13-50
 	android:mimeType
-		ADDED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/AndroidManifest.xml:42:19-48
+		ADDED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/AndroidManifest.xml:42:19-48
 uses-permission#android.permission.INTERNET
-ADDED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml:6:5-66
+ADDED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml:6:5-66
 	android:name
-		ADDED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml:6:22-64
+		ADDED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml:6:22-64
 uses-sdk
-INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml
-INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml
+INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml
+INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml
 MERGED from [androidx.fragment:fragment:1.7.1] /Users/armanfathabadi/.gradle/caches/transforms-3/7799b48b7fd3b8774825c296dd579627/transformed/fragment-1.7.1/AndroidManifest.xml:5:5-44
 MERGED from [androidx.fragment:fragment:1.7.1] /Users/armanfathabadi/.gradle/caches/transforms-3/7799b48b7fd3b8774825c296dd579627/transformed/fragment-1.7.1/AndroidManifest.xml:5:5-44
 MERGED from [androidx.window:window:1.2.0] /Users/armanfathabadi/.gradle/caches/transforms-3/49ca8dca74d3fdc122073b7a5974c5d0/transformed/jetified-window-1.2.0/AndroidManifest.xml:20:5-44
@@ -133,9 +133,9 @@ MERGED from [androidx.window.extensions.core:core:1.0.0] /Users/armanfathabadi/.
 MERGED from [com.getkeepsafe.relinker:relinker:1.4.5] /Users/armanfathabadi/.gradle/caches/transforms-3/0fa9983a94f45c67467302b3cea9a10d/transformed/jetified-relinker-1.4.5/AndroidManifest.xml:5:5-43
 MERGED from [com.getkeepsafe.relinker:relinker:1.4.5] /Users/armanfathabadi/.gradle/caches/transforms-3/0fa9983a94f45c67467302b3cea9a10d/transformed/jetified-relinker-1.4.5/AndroidManifest.xml:5:5-43
 	android:targetSdkVersion
-		INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/AndroidManifest.xml
 uses-library#androidx.window.extensions
 ADDED from [androidx.window:window:1.2.0] /Users/armanfathabadi/.gradle/caches/transforms-3/49ca8dca74d3fdc122073b7a5974c5d0/transformed/jetified-window-1.2.0/AndroidManifest.xml:23:9-25:40
 	android:required

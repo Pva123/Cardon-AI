@@ -18,10 +18,10 @@ com.example.cardon_ai.app-lifecycle-runtime-2.7.0-16 /Users/armanfathabadi/.grad
 com.example.cardon_ai.app-jetified-core-1.0.0-17 /Users/armanfathabadi/.gradle/caches/transforms-3/c31a4bb5a15a2ee7a96dbe06c89e85f5/transformed/jetified-core-1.0.0/res
 com.example.cardon_ai.app-jetified-lifecycle-process-2.7.0-18 /Users/armanfathabadi/.gradle/caches/transforms-3/dbde9cdc77876e4df7bbc93ff1556b43/transformed/jetified-lifecycle-process-2.7.0/res
 com.example.cardon_ai.app-jetified-startup-runtime-1.1.1-19 /Users/armanfathabadi/.gradle/caches/transforms-3/fabdcf8916c57220c7a394d04ce23100/transformed/jetified-startup-runtime-1.1.1/res
-com.example.cardon_ai.app-debug-20 /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/debug/res
-com.example.cardon_ai.app-main-21 /Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/res
-com.example.cardon_ai.app-pngs-22 /Users/armanfathabadi/cardon_ai/cardon_ai/build/app/generated/res/pngs/debug
-com.example.cardon_ai.app-resValues-23 /Users/armanfathabadi/cardon_ai/cardon_ai/build/app/generated/res/resValues/debug
-com.example.cardon_ai.app-packageDebugResources-24 /Users/armanfathabadi/cardon_ai/cardon_ai/build/app/intermediates/incremental/debug/packageDebugResources/merged.dir
-com.example.cardon_ai.app-packageDebugResources-25 /Users/armanfathabadi/cardon_ai/cardon_ai/build/app/intermediates/incremental/debug/packageDebugResources/stripped.dir
-com.example.cardon_ai.app-merged_res-26 /Users/armanfathabadi/cardon_ai/cardon_ai/build/app/intermediates/merged_res/debug
+com.example.cardon_ai.app-debug-20 /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/debug/res
+com.example.cardon_ai.app-main-21 /Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/res
+com.example.cardon_ai.app-pngs-22 /Users/armanfathabadi/Flutter_projects/cardon-ai/build/app/generated/res/pngs/debug
+com.example.cardon_ai.app-resValues-23 /Users/armanfathabadi/Flutter_projects/cardon-ai/build/app/generated/res/resValues/debug
+com.example.cardon_ai.app-packageDebugResources-24 /Users/armanfathabadi/Flutter_projects/cardon-ai/build/app/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.example.cardon_ai.app-packageDebugResources-25 /Users/armanfathabadi/Flutter_projects/cardon-ai/build/app/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.example.cardon_ai.app-merged_res-26 /Users/armanfathabadi/Flutter_projects/cardon-ai/build/app/intermediates/merged_res/debug

@@ -4,7 +4,7 @@
             "outputFile": "com.example.cardon_ai.app-mergeDebugResources-24:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/armanfathabadi/cardon_ai/cardon_ai/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/armanfathabadi/Flutter_projects/cardon-ai/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

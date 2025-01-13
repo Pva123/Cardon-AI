@@ -1,0 +1,1 @@
+ /Users/armanfathabadi/Flutter_projects/cardon-ai/.dart_tool/flutter_build/1ecf1955684190ec43c3bfe974a78a4c/native_assets.yaml: 
