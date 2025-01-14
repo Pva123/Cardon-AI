@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/nav_button.dart';
+import '../widgets/faq_item.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -7,53 +8,70 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 48.0),
-          child: Column(
-            children: [
-              _buildNavBar(),
-              _buildHeroSection(),
-              _buildAboutSection(),
-              _buildTeamSection(),
-              _buildContactSection(),
-              _buildFAQSection(),
-            ],
-          ),
+        child: Column(
+          children: [
+            _buildNavBar(context),
+            _buildHeaderSection(),
+            _buildAboutSection(),
+            _buildTeamSection(),
+            _buildContactSection(),
+            _buildFAQSection(),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildNavBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+  /// Navbar with logo, navigation links, and Sign Up / Log In buttons
+  Widget _buildNavBar(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // Logo Section: Adjusted size for CARDON AI logo
           Row(
-  children: [
-    Image.asset(
-      'assets/images/CARDON_AI_Logo.png',
-      height: 24,
-      fit: BoxFit.contain,
-    ),
-  ],
-),
+            children: [
+              Image.asset(
+                'assets/images/CARDON_AI_Logo.png',
+                height: 30, // Reduced size from 40 to 30
+              ),
+            ],
+          ),
+          // Navigation Links and Buttons
           Row(
             children: [
               NavButton(label: 'About', onPressed: () {}),
-              const SizedBox(width: 32),
+              const SizedBox(width: 8),
               NavButton(label: 'Team', onPressed: () {}),
-              const SizedBox(width: 32),
+              const SizedBox(width: 8),
               NavButton(label: 'Contact Us', onPressed: () {}),
-              const SizedBox(width: 32),
+              const SizedBox(width: 8),
               NavButton(label: 'FAQ', onPressed: () {}),
-              const SizedBox(width: 32),
-              _buildSignUpButton(),
               const SizedBox(width: 16),
-              _buildLoginButton(),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                ),
+                child: const Text('Sign Up'),
+              ),
+              const SizedBox(width: 8),
+              OutlinedButton(
+                onPressed: () {},
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.orange),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                ),
+                child: const Text(
+                  'Log In',
+                  style: TextStyle(color: Colors.orange),
+                ),
+              ),
             ],
           ),
         ],
@@ -61,309 +79,187 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeroSection() {
+  /// Header Section
+  Widget _buildHeaderSection() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 60),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Cardon-AI: The Assistant That Simplifies Your Life.',
-                  style: TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                    height: 1.2,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    Image.asset('assets/images/calendar_icon.png', height: 24),
-                    const SizedBox(width: 8),
-                    const Text(
-                      'Schedule Management Made Simple',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Image.asset('assets/images/hero_image.png'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAboutSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 60),
+      padding: const EdgeInsets.symmetric(vertical: 24),
       child: Column(
         children: [
           const Text(
-            'About',
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 24),
-          const Text(
-            'It all started with ✨',
-            style: TextStyle(fontSize: 20),
-          ),
-          const SizedBox(height: 24),
-          RichText(
+            'Cardon-AI: The Assistant That Simplifies Your Life.',
             textAlign: TextAlign.center,
-            text: const TextSpan(
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.black,
-                height: 1.5,
-              ),
-              children: [
-                TextSpan(text: '"What if we wrote our own weekly schedule and plan '),
-                TextSpan(text: '📋', style: TextStyle(fontSize: 28)),
-                TextSpan(text: '"'),
-              ],
-            ),
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 24),
-          RichText(
-            textAlign: TextAlign.center,
-            text: const TextSpan(
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.black,
-                height: 1.5,
-              ),
-              children: [
-                TextSpan(text: 'Now Cardon-AI can not only help you manage your entire week, it can even act as your personal assistant'),
-                TextSpan(text: '🌊', style: TextStyle(fontSize: 28)),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTeamSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 60),
-      child: Column(
-        children: [
-          const Text(
-            'Team',
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 48),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _buildTeamMember('assets/images/team1.png'),
-              const SizedBox(width: 24),
-              _buildTeamMember('assets/images/team2.png'),
-              const SizedBox(width: 24),
-              _buildTeamMember('assets/images/team3.png'),
-              const SizedBox(width: 24),
-              _buildTeamMember('assets/images/team4.png'),
+              // MacBook Content
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/macbook_icon.png',
+                    height: 300,
+                  ),
+                  Image.asset(
+                    'assets/images/image_inside_macbook.png',
+                    height: 250,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                  width: 24), // Space between MacBook and Calendar Icon
+              // Calendar Icon - Repositioned
+              Align(
+                alignment: Alignment.topCenter,
+                child: Image.asset(
+                  'assets/images/calender_light_mode.png',
+                  height: 80, // Adjusted size as needed
+                ),
+              ),
+              const SizedBox(
+                  width: 24), // Space between Calendar Icon and iPhone
+              // iPhone Content
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/iphone_icon.png',
+                    height: 150,
+                  ),
+                  Image.asset(
+                    'assets/images/image_inside_iphone.png',
+                    height: 125,
+                  ),
+                ],
+              ),
             ],
-          ),
-          const SizedBox(height: 48),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset('assets/images/team_photo.png'),
           ),
         ],
       ),
     );
   }
 
+  /// Contact Us Section
   Widget _buildContactSection() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 60),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
       child: Column(
         children: [
           const Text(
             'Contact Us',
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Full Name',
+              border: OutlineInputBorder(),
             ),
           ),
-          const SizedBox(height: 48),
-          Container(
-            width: 600,
-            padding: const EdgeInsets.all(32),
-            decoration: BoxDecoration(
-              color: Colors.grey[50],
-              borderRadius: BorderRadius.circular(20),
+          const SizedBox(height: 16),
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Email',
+              border: OutlineInputBorder(),
             ),
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Full Name',
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                TextFormField(
-                  maxLines: 4,
-                  decoration: const InputDecoration(
-                    labelText: 'Message',
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFFF7A00),
-                    padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Submit',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
+          ),
+          const SizedBox(height: 16),
+          TextFormField(
+            maxLines: 5,
+            decoration: const InputDecoration(
+              labelText: 'Message',
+              border: OutlineInputBorder(),
             ),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.orange,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            ),
+            child: const Text('Submit'),
           ),
         ],
       ),
     );
   }
 
+  /// About Section
+  Widget _buildAboutSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
+      child: Column(
+        children: [
+          const Text(
+            'About Us',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            'Cardon-AI is your intelligent personal assistant designed to make your life easier.',
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Team Section
+  Widget _buildTeamSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
+      child: Column(
+        children: [
+          const Text(
+            'Our Team',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            'Meet the talented individuals behind Cardon-AI.',
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// FAQ Section
   Widget _buildFAQSection() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 60),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           const Text(
             'FAQ',
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 48),
-          Container(
-            width: 600,
-            decoration: BoxDecoration(
-              color: Colors.grey[50],
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              children: [
-                _buildFAQItem('What is even cardon-AI 🤔?'),
-                _buildFAQItem('How can Cardon-AI help me?👨‍💻'),
-                _buildFAQItem('What features Cardon-AI has?⌨️'),
-              ],
-            ),
+          const SizedBox(height: 16),
+          FaqItem(
+            question: 'What is even Cardon-AI 🧐?',
+            answer: 'Cardon-AI is your personal assistant that helps plan, '
+                'schedule, and organize your tasks for the week.',
+          ),
+          const Divider(),
+          FaqItem(
+            question: 'How can Cardon-AI help me? 🤖',
+            answer:
+                'It simplifies your day-to-day routine by automatically planning '
+                'and managing your schedule, sending reminders, and more.',
+          ),
+          const Divider(),
+          FaqItem(
+            question: 'What features Cardon-AI has? 🔧',
+            answer:
+                'Appointment scheduling, task management, reminders, and more. '
+                'New features are added regularly!',
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildSignUpButton() {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.grey[100],
-        foregroundColor: Colors.black,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-      child: const Text('Sign up'),
-    );
-  }
-
-  Widget _buildLoginButton() {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFFFF7A00),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-      child: const Text('Log in'),
-    );
-  }
-
-  Widget _buildTeamMember(String imagePath) {
-    return CircleAvatar(
-      radius: 40,
-      backgroundImage: AssetImage(imagePath),
-    );
-  }
-
-  Widget _buildFAQItem(String question) {
-    return ExpansionTile(
-      title: Text(
-        question,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      children: const [
-        Padding(
-          padding: EdgeInsets.all(16),
-          child: Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
