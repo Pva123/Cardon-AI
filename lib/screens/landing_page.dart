@@ -85,10 +85,19 @@ class LandingPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: Column(
         children: [
-          const Text(
-            'Cardon-AI: The Assistant That Simplifies Your Life.',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Cardon-AI: The Assistant That Simplifies Your Life ',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              ),
+              Image.asset(
+                'assets/images/calender_light_mode.png',
+                height: 52, // Adjust the size to match the text
+              ),
+            ],
           ),
           const SizedBox(height: 16),
           Row(
@@ -109,18 +118,7 @@ class LandingPage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
-                  width: 24), // Space between MacBook and Calendar Icon
-              // Calendar Icon - Repositioned
-              Align(
-                alignment: Alignment.topCenter,
-                child: Image.asset(
-                  'assets/images/calender_light_mode.png',
-                  height: 80, // Adjusted size as needed
-                ),
-              ),
-              const SizedBox(
-                  width: 24), // Space between Calendar Icon and iPhone
+              const SizedBox(width: 24), // Space between MacBook and iPhone
               // iPhone Content
               Stack(
                 alignment: Alignment.center,
