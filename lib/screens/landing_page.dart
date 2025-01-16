@@ -9,15 +9,18 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildNavBar(context),
-            _buildHeaderSection(),
-            _buildAboutSection(),
-            _buildTeamSection(),
-            _buildContactSection(),
-            _buildFAQSection(),
-          ],
+        child: SelectionArea(
+          // Wrap the entire page with SelectionArea
+          child: Column(
+            children: [
+              _buildNavBar(context),
+              _buildHeaderSection(),
+              _buildAboutSection(),
+              _buildTeamSection(),
+              _buildContactSection(),
+              _buildFAQSection(),
+            ],
+          ),
         ),
       ),
     );
@@ -151,25 +154,37 @@ class LandingPage extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Full Name',
-              border: OutlineInputBorder(),
-            ),
-          ),
-          const SizedBox(height: 16),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'Email',
-              border: OutlineInputBorder(),
-            ),
-          ),
-          const SizedBox(height: 16),
-          TextFormField(
-            maxLines: 5,
-            decoration: const InputDecoration(
-              labelText: 'Message',
-              border: OutlineInputBorder(),
+          SelectionArea(
+            child: Column(
+              children: [
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Full Name',
+                    border: OutlineInputBorder(),
+                  ),
+                  enableInteractiveSelection: true, // Ensures text selection
+                  textInputAction: TextInputAction.done, // Smooth interaction
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                  ),
+                  enableInteractiveSelection: true, // Ensures text selection
+                  textInputAction: TextInputAction.done, // Smooth interaction
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  maxLines: 5,
+                  decoration: const InputDecoration(
+                    labelText: 'Message',
+                    border: OutlineInputBorder(),
+                  ),
+                  enableInteractiveSelection: true, // Ensures text selection
+                  textInputAction: TextInputAction.newline, // For multiline
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 16),
