@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/landing_page.dart';
+import 'login_page.dart';
 
 void main() {
   runApp(const CardonAIApp());
@@ -18,7 +19,11 @@ class CardonAIApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const LandingPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LandingPage(),
+        '/login': (context) => const CardonLoginPage(),
+      },
     );
   }
 }

@@ -61,17 +61,19 @@ class LandingPage extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.orange),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  onPressed: () {
+                    // Navigate to the login page when the button is clicked
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: Colors.orange),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  ),
+                  child: const Text(
+                    'Log In',
+                    style: TextStyle(color: Colors.orange),
+                  ),
                 ),
-                child: const Text(
-                  'Log In',
-                  style: TextStyle(color: Colors.orange),
-                ),
-              ),
             ],
           ),
         ],
