@@ -170,10 +170,10 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-01-15T23:52:36.424065Z",
+  "generated": "2025-01-18T23:32:06.428863Z",
   "generator": "pub",
-  "generatorVersion": "3.6.0",
+  "generatorVersion": "3.6.1",
   "flutterRoot": "file:///Users/mayar/development/flutter",
-  "flutterVersion": "3.27.1",
+  "flutterVersion": "3.27.2",
   "pubCache": "file:///Users/mayar/.pub-cache"
 }
