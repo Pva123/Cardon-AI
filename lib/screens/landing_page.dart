@@ -213,7 +213,7 @@ class LandingPage extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const Text(
-            'Cardon-AI is your intelligent personal assistant designed to make your life easier.',
+            'It all started with ✨\n“What if we wrote our own weekly schedule and planner 📆”\nNow Cardon-AI can not only help you manage your entire week, it can even act as your personal assistant and pomodoro Timer.🤖',
             textAlign: TextAlign.center,
           ),
         ],
