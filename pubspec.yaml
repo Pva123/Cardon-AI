@@ -1,32 +1,33 @@
 name: cardon_ai
-description: "A new Flutter project."
-# Prevent accidental publishing to pub.dev
+description: "Cardon AI - Your Personal Assistant"
 publish_to: 'none'
 
-# Application version and build number
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.6.0
+  sdk: '>=3.6.0 <4.0.0'
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  flutter_emoji: ^2.5.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
 
-# Flutter-specific configuration
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: NotoColorEmoji
+      fonts:
+        - asset: assets/fonts/NotoColorEmoji.ttf
   assets:
-    - assets/images/macbook_icon.png
-    - assets/images/CARDON_AI_Logo.png
-    - assets/images/calender_light_mode.png
-    - assets/images/image_inside_macbook.png
-    - assets/images/image_inside_iphone.png
-    - assets/images/iphone_icon.png
+    - assets/images/
+    - assets/fonts/
+
+
