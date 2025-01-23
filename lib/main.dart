@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/landing_page.dart';
 import 'login_page.dart';
+import 'cardon_auth_pages.dart';
 
 void main() {
   runApp(const CardonAIApp());
@@ -23,6 +24,8 @@ class CardonAIApp extends StatelessWidget {
       routes: {
         '/': (context) => const LandingPage(),
         '/login': (context) => const CardonLoginPage(),
+        '/signup': (context) => const CardonSignUpPage(),
+        '/forgot-password': (context) => const CardonForgotPasswordPage(),
       },
     );
   }

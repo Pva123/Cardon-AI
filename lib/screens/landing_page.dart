@@ -51,7 +51,9 @@ class LandingPage extends StatelessWidget {
               NavButton(label: 'FAQ', onPressed: () {}),
               const SizedBox(width: 16),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/signup');
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
                   padding:
