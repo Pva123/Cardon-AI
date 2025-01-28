@@ -1,0 +1,80 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter run -d chrome
+
+## exception
+
+RPCError: ext.flutter.profileWidgetBuilds: (-32603) Unexpected DWDS error for callServiceExtension: WipError -32000 Promise was collected
+
+```
+#0      new _OutstandingRequest (package:vm_service/src/vm_service.dart:265:34)
+#1      VmService._call.<anonymous closure> (package:vm_service/src/vm_service.dart:1921:25)
+#2      VmService._call (package:vm_service/src/vm_service.dart:1933:8)
+#3      VmService.callServiceExtension (package:vm_service/src/vm_service.dart:1872:14)
+#4      FlutterVmService._checkedCallServiceExtension (package:flutter_tools/src/vmservice.dart:889:28)
+#5      FlutterVmService.invokeFlutterExtensionRpcRaw (package:flutter_tools/src/vmservice.dart:909:49)
+#6      FlutterVmService._flutterToggle (package:flutter_tools/src/vmservice.dart:704:21)
+<asynchronous suspension>
+#7      ResidentHandlers.debugToggleProfileWidgetBuilds (package:flutter_tools/src/resident_runner.dart:858:9)
+<asynchronous suspension>
+#8      TerminalHandler.processTerminalInput (package:flutter_tools/src/resident_runner.dart:1786:7)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[32m[✓][39m Flutter (Channel stable, 3.27.3, on macOS 15.2 24C101 darwin-arm64, locale en-CA)
+    [32m•[39m Flutter version 3.27.3 on channel stable at /Users/mayar/development/flutter
+    [32m•[39m Upstream repository https://github.com/flutter/flutter.git
+    [32m•[39m Framework revision c519ee916e (7 days ago), 2025-01-21 10:32:23 -0800
+    [32m•[39m Engine revision e672b006cb
+    [32m•[39m Dart version 3.6.1
+    [32m•[39m DevTools version 2.40.2
+
+[32m[✓][39m Android toolchain - develop for Android devices (Android SDK version 35.0.0)
+    [32m•[39m Android SDK at /Users/mayar/Library/Android/sdk
+    [32m•[39m Platform android-35, build-tools 35.0.0
+    [32m•[39m Java binary at: /Applications/Android Studio.app/Contents/jbr/Contents/Home/bin/java
+    [32m•[39m Java version OpenJDK Runtime Environment (build 17.0.11+0-17.0.11b1207.24-11852314)
+    [32m•[39m All Android licenses accepted.
+
+[32m[✓][39m Xcode - develop for iOS and macOS (Xcode 16.2)
+    [32m•[39m Xcode at /Applications/Xcode.app/Contents/Developer
+    [32m•[39m Build 16C5032a
+    [32m•[39m CocoaPods version 1.16.2
+
+[32m[✓][39m Chrome - develop for the web
+    [32m•[39m Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+
+[32m[✓][39m Android Studio (version 2024.1)
+    [32m•[39m Android Studio at /Applications/Android Studio.app/Contents
+    [32m•[39m Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    [32m•[39m Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    [32m•[39m Java version OpenJDK Runtime Environment (build 17.0.11+0-17.0.11b1207.24-11852314)
+
+[32m[✓][39m IntelliJ IDEA Community Edition (version 2023.1.2)
+    [32m•[39m IntelliJ at /Applications/IntelliJ IDEA CE.app
+    [32m•[39m Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    [32m•[39m Dart plugin version 231.9065
+
+[32m[✓][39m VS Code (version 1.96.4)
+    [32m•[39m VS Code at /Users/mayar/Desktop/Visual Studio Code.app/Contents
+    [32m•[39m Flutter extension version 3.102.0
+
+[32m[✓][39m Connected device (3 available)
+    [32m•[39m macOS (desktop)                 • macos                 • darwin-arm64   • macOS 15.2 24C101 darwin-arm64
+    [32m•[39m Mac Designed for iPad (desktop) • mac-designed-for-ipad • darwin         • macOS 15.2 24C101 darwin-arm64
+    [32m•[39m Chrome (web)                    • chrome                • web-javascript • Google Chrome 132.0.6834.111
+
+[32m[✓][39m Network resources
+    [32m•[39m All expected network resources are available.
+
+[32m•[39m No issues found!
+```

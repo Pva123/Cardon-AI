@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../widgets/nav_button.dart';
 import '../styles/app_typography.dart'; // Add this import
 
+ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
@@ -14,22 +16,47 @@ class LandingPage extends StatelessWidget {
   );
 
   @override
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildNavBar(context),
-            _buildHeaderSection(),
-            _buildShowcaseSection(),
-            _buildAboutSection(),
-            _buildTeamSection(),
-            _buildContactUsSection(), // Add this line
-            _buildFAQSection(),
-            _buildFooterSection(),
-          ],
-        ),
-      ),
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeNotifier,
+      builder: (context, currentTheme, child) {
+        return MaterialApp(
+          theme: ThemeData(
+            brightness: Brightness.light,
+            scaffoldBackgroundColor: Colors.white, // Light mode background
+            primaryColor: Colors.black, // Light mode primary color
+            textTheme: const TextTheme(
+              bodyLarge: TextStyle(color: Colors.black), // Light mode text
+            ),
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            scaffoldBackgroundColor: Colors.black, // Dark mode background
+            primaryColor: Colors.white, // Dark mode primary color
+            textTheme: const TextTheme(
+              bodyLarge: TextStyle(color: Colors.white), // Dark mode text
+            ),
+          ),
+          themeMode: currentTheme, // Dynamically switch theme
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildNavBar(context),
+                  _buildHeaderSection(),
+                  _buildShowcaseSection(),
+                  _buildAboutSection(),
+                  _buildTeamSection(),
+                  _buildContactUsSection(),
+                  _buildFAQSection(),
+                  _buildFooterSection(),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -42,6 +69,34 @@ class LandingPage extends StatelessWidget {
           Image.asset('assets/images/CARDON_AI_Logo.png', height: 40),
           Row(
             children: [
+              Material(
+                color: themeNotifier.value == ThemeMode.light
+                    ? Colors.black
+                    : Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                child: InkWell(
+                  onTap: () {
+                    themeNotifier.value = themeNotifier.value == ThemeMode.light
+                        ? ThemeMode.dark
+                        : ThemeMode.light;
+                  },
+                  borderRadius: BorderRadius.circular(8),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
+                    child: Text(
+                      themeNotifier.value == ThemeMode.light ? '🌙' : '🌞',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: themeNotifier.value == ThemeMode.light
+                            ? Colors.white // White moon in light mode
+                            : Colors.amber, // Yellow sun in dark mode
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
               NavButton(label: 'About', onPressed: () {}),
               NavButton(label: 'Team', onPressed: () {}),
               NavButton(label: 'FAQ', onPressed: () {}),
