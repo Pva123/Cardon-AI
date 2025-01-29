@@ -22,6 +22,7 @@ class LandingPage extends StatelessWidget {
       valueListenable: themeNotifier,
       builder: (context, currentTheme, child) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             brightness: Brightness.light,
             scaffoldBackgroundColor: Colors.white, // Light mode background
