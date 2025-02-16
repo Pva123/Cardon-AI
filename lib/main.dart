@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/landing_page.dart';
+import 'screens/Minimal_Page.dart';
 
 void main() {
   runApp(const CardonAIApp());
@@ -18,7 +19,7 @@ class CardonAIApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const LandingPage(),
+      home: const MinimalPage(),
     );
   }
 }
