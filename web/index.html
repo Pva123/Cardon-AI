@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <base href="$FLUTTER_BASE_HREF">
+  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Cardon AI - Your Personal Assistant">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,6 +13,7 @@
   <title>Cardon AI</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="preload" as="font" href="assets/fonts/NotoColorEmoji.ttf" type="font/ttf" crossorigin="anonymous">
+  
   <style>
     @font-face {
       font-family: 'NotoColorEmoji';
@@ -22,15 +23,46 @@
       font-display: swap;
     }
   </style>
+
+  <!-- ✅ Updated Firebase SDK -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "firebase/app";
+    import { getAnalytics } from "firebase/analytics";
+
+    // Firebase configuration (✅ Updated `storageBucket`)
+    const firebaseConfig = {
+      apiKey: "AIzaSyDltCerXfO4s-Dq5RzdoxPz14BRsljQy94",
+      authDomain: "cardon-ai-project.firebaseapp.com",
+      projectId: "cardon-ai-project",
+      storageBucket: "cardon-ai-project.appspot.com",  // ✅ Fixed URL
+      messagingSenderId: "873897826846",
+      appId: "1:873897826846:web:3f4c1510c3d95557ef2c0f",
+      measurementId: "G-KCZXDCWZNV"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    console.log("✅ Firebase Initialized:", app);
+
+    // Initialize Firebase Analytics
+    let analytics;
+    if (typeof window !== "undefined") {
+      analytics = getAnalytics(app);
+      console.log("📊 Firebase Analytics Loaded:", analytics);
+    }
+  </script>
+
+  <!-- Load Flutter Web -->
+  <script src="flutter.js" defer></script>
 </head>
-<body></body>
+<body>
   <script>
-    var serviceWorkerVersion = null;
+    var serviceWorkerVersion = "295470703";
     var scriptLoaded = false;
+
     function loadMainDartJs() {
-      if (scriptLoaded) {
-        return;
-      }
+      if (scriptLoaded) return;
       scriptLoaded = true;
       var scriptTag = document.createElement('script');
       scriptTag.src = 'main.dart.js';
@@ -46,7 +78,7 @@
             function waitForActivation(serviceWorker) {
               serviceWorker.addEventListener('statechange', () => {
                 if (serviceWorker.state == 'activated') {
-                  console.log('Installed new service worker.');
+                  console.log('🔄 Installed new service worker.');
                   loadMainDartJs();
                 }
               });
@@ -63,9 +95,10 @@
       loadMainDartJs();
     }
   </script>
+
   <script>
     window.addEventListener('load', function(ev) {
-      _flutter.loader.loadEntrypoint({
+      _flutter.loader.load({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },

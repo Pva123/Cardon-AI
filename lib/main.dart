@@ -11,7 +11,7 @@ class CardonAIApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Cardon-AI',
+      title: 'Cardon AI',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.orange,
