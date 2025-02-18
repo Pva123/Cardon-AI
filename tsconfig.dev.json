@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",
+      "module": "CommonJS",
+      "lib": ["ES2020"],
+      "strict": true,
+      "rootDir": "./functions/src",
+      "outDir": "./functions/lib",
+      "sourceMap": true,
+      "resolveJsonModule": true,
+      "esModuleInterop": true
+    },
+    "include": ["functions/src"]
+  }
+  
