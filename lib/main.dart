@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'screens/landing_page.dart';
 import 'screens/Minimal_Page.dart';
-import 'services/ai_service.dart'; // Import AI service
+import 'services/ai_service.dart';
+import 'widgets/nav_button.dart'; // Import the nav button widget
 
 void main() {
   runApp(const CardonAIApp());
@@ -20,12 +21,11 @@ class CardonAIApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const AIChatPage(), // Replaced MinimalPage with AI Chat Page
+      home: const AIChatPage(),
     );
   }
 }
 
-// 🔹 New AI Chat Page
 class AIChatPage extends StatefulWidget {
   const AIChatPage({super.key});
 
@@ -55,10 +55,59 @@ class _AIChatPageState extends State<AIChatPage> {
     }
   }
 
+  void _navigateToPage(BuildContext context, Widget page) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Google Gemini AI Assistant")),
+      appBar: AppBar(
+        title: const Text("Google Gemini AI Assistant"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Navigation'),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        NavButton(
+                          label: 'AI Chat',
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        NavButton(
+                          label: 'Landing Page',
+                          onPressed: () {
+                            Navigator.pop(context);
+                            _navigateToPage(context, const LandingPage());
+                          },
+                        ),
+                        NavButton(
+                          label: 'Minimal Page',
+                          onPressed: () {
+                            Navigator.pop(context);
+                            _navigateToPage(context, const MinimalPage());
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -78,6 +127,45 @@ class _AIChatPageState extends State<AIChatPage> {
               aiResponse,
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.orange,
+              ),
+              child: Text(
+                'Cardon-AI',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text('AI Chat'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: const Text('Landing Page'),
+              onTap: () {
+                Navigator.pop(context);
+                _navigateToPage(context, const LandingPage());
+              },
+            ),
+            ListTile(
+              title: const Text('Minimal Page'),
+              onTap: () {
+                Navigator.pop(context);
+                _navigateToPage(context, const MinimalPage());
+              },
             ),
           ],
         ),
