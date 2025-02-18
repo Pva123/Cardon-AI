@@ -1,3 +1,4 @@
+import 'login_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/nav_button.dart';
 import '../styles/app_typography.dart'; // Add this import
@@ -10,12 +11,11 @@ class LandingPage extends StatelessWidget {
   static const TextStyle _emojiStyle = TextStyle(
     fontFamily: 'NotoColorEmoji',
     fontSize: 18,
-    height: 1.2, // Reduced from 1.4
-    letterSpacing: 0.2, // Reduced from 0.5
-    wordSpacing: 1.0, // Reduced from 2.0
+    height: 1.2,
+    letterSpacing: 0.2,
+    wordSpacing: 1.0,
   );
 
-  @override
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
@@ -23,36 +23,73 @@ class LandingPage extends StatelessWidget {
       builder: (context, currentTheme, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
+
+          // ---------------------------
+          // Light Theme
+          // ---------------------------
           theme: ThemeData(
             brightness: Brightness.light,
-            scaffoldBackgroundColor: Colors.white, // Light mode background
-            primaryColor: Colors.black, // Light mode primary color
+            scaffoldBackgroundColor: Colors.white,
+            primaryColor: Colors.black,
             textTheme: const TextTheme(
-              bodyLarge: TextStyle(color: Colors.black), // Light mode text
+              bodyLarge: TextStyle(color: Colors.black),
+              bodyMedium: TextStyle(color: Colors.black),
+              bodySmall: TextStyle(color: Colors.black),
+              titleLarge: TextStyle(color: Colors.black),
             ),
           ),
+
+          // ---------------------------
+          // Dark Theme
+          // ---------------------------
           darkTheme: ThemeData(
             brightness: Brightness.dark,
-            scaffoldBackgroundColor: Colors.black, // Dark mode background
-            primaryColor: Colors.white, // Dark mode primary color
+            scaffoldBackgroundColor: const Color(0xFF0A0E1A),
+            primaryColor: const Color(0xFFFFD700),
+            colorScheme: const ColorScheme.dark(
+              primary: Color(0xFFFFD700), // Gold
+              secondary: Color(0xFF03DAC6),
+              background: Color(0xFF0A0E1A),
+              surface: Color(0xFF141B2D),
+              onBackground: Color(0xFFECECEC),
+              onSurface: Color(0xFFECECEC),
+            ),
             textTheme: const TextTheme(
-              bodyLarge: TextStyle(color: Colors.white), // Dark mode text
+              bodyLarge: TextStyle(color: Colors.white),
+              bodyMedium: TextStyle(color: Colors.white),
+              bodySmall: TextStyle(color: Colors.white),
+              titleLarge: TextStyle(color: Colors.white),
+            ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Color(0xFF141B2D),
+              foregroundColor: Colors.white,
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFFFD700),
+                foregroundColor: Color(0xFF0A0E1A),
+              ),
             ),
           ),
-          themeMode: currentTheme, // Dynamically switch theme
+
+          // Dynamically switch theme
+          themeMode: currentTheme,
+
           home: Scaffold(
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  _buildNavBar(context),
-                  _buildHeaderSection(),
-                  _buildShowcaseSection(),
-                  _buildAboutSection(),
-                  _buildTeamSection(),
-                  _buildContactUsSection(),
-                  _buildFAQSection(),
-                  _buildFooterSection(),
-                ],
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _buildNavBar(context),
+                    _buildHeaderSection(),
+                    _buildShowcaseSection(),
+                    _buildAboutSection(),
+                    _buildTeamSection(),
+                    _buildContactUsSection(),
+                    _buildFAQSection(context),
+                    _buildFooterSection(context),
+                  ],
+                ),
               ),
             ),
           ),
@@ -62,36 +99,39 @@ class LandingPage extends StatelessWidget {
   }
 
   Widget _buildNavBar(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
+      // Use the same color as scaffold in dark mode for a seamless look
+      color: isDark ? const Color(0xFF0A0E1A) : Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // Logo
           Image.asset('assets/images/CARDON_AI_Logo.png', height: 40),
           Row(
             children: [
+              // Theme Toggle Button
               Material(
-                color: themeNotifier.value == ThemeMode.light
-                    ? Colors.black
-                    : Colors.white,
+                color: isDark ? Colors.white : Colors.black,
                 borderRadius: BorderRadius.circular(8),
                 child: InkWell(
                   onTap: () {
-                    themeNotifier.value = themeNotifier.value == ThemeMode.light
-                        ? ThemeMode.dark
-                        : ThemeMode.light;
+                    // Toggle between light and dark
+                    themeNotifier.value =
+                        isDark ? ThemeMode.light : ThemeMode.dark;
                   },
                   borderRadius: BorderRadius.circular(8),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 10),
+                      horizontal: 16,
+                      vertical: 10,
+                    ),
                     child: Text(
-                      themeNotifier.value == ThemeMode.light ? '🌙' : '🌞',
+                      isDark ? '🌞' : '🌙',
                       style: TextStyle(
                         fontSize: 18,
-                        color: themeNotifier.value == ThemeMode.light
-                            ? Colors.white // White moon in light mode
-                            : Colors.amber, // Yellow sun in dark mode
+                        color: isDark ? Colors.amber : Colors.white,
                       ),
                     ),
                   ),
@@ -104,13 +144,27 @@ class LandingPage extends StatelessWidget {
               const SizedBox(width: 16),
               NavButton(
                 label: 'Log In',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CardonLoginPage(),
+                    ),
+                  );
+                },
                 isPrimary: true,
               ),
               const SizedBox(width: 8),
               NavButton(
                 label: 'Sign Up',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CardonLoginPage(),
+                    ),
+                  );
+                },
                 isPrimary: true,
               ),
             ],
@@ -177,30 +231,9 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFramedImage({
-    required String framePath,
-    required String innerImagePath,
-    required double frameHeight,
-    required EdgeInsets innerPadding,
-  }) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Image.asset(framePath, height: frameHeight),
-        Padding(
-          padding: innerPadding,
-          child: Image.asset(innerImagePath, height: frameHeight * 0.7),
-        ),
-      ],
-    );
-  }
-
   Widget _buildAboutSection() {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 48,
-        horizontal: 32,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -229,8 +262,9 @@ class LandingPage extends StatelessWidget {
               style: AppTypography.bodyText,
               children: [
                 const TextSpan(
-                    text:
-                        '"What if we wrote our own weekly schedule and planner '),
+                  text:
+                      '"What if we wrote our own weekly schedule and planner ',
+                ),
                 TextSpan(
                   text: '📅',
                   style: AppTypography.bodyTextEmoji,
@@ -323,7 +357,6 @@ class LandingPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Section title
           SelectableText(
             'Contact Us',
             style: AppTypography.sectionTitle,
@@ -331,56 +364,21 @@ class LandingPage extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          // Full Name Input Field
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Full Name',
-              labelStyle: AppTypography.bodyText,
-              filled: true,
-              fillColor: Colors.grey[200],
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-            ),
-          ),
+          // Name
+          _buildTextField('Full Name'),
           const SizedBox(height: 16),
 
-          // Email Input Field
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Email',
-              labelStyle: AppTypography.bodyText,
-              filled: true,
-              fillColor: Colors.grey[200],
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-            ),
-          ),
+          // Email
+          _buildTextField('Email'),
           const SizedBox(height: 16),
 
-          // Message Input Field
-          TextField(
-            maxLines: 5,
-            decoration: InputDecoration(
-              labelText: 'Message',
-              labelStyle: AppTypography.bodyText,
-              filled: true,
-              fillColor: Colors.grey[200],
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-            ),
-          ),
+          // Message
+          _buildTextField('Message', maxLines: 5),
           const SizedBox(height: 24),
 
-          // Submit Button
           ElevatedButton(
             onPressed: () {
-              // Add functionality here (e.g., send the message to the server)
+              // Add functionality here
             },
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
@@ -399,7 +397,36 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFAQSection() {
+  // A helper that adjusts the fill color for dark mode
+  Widget _buildTextField(String label, {int maxLines = 1}) {
+    return Builder(
+      builder: (context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+        return TextField(
+          maxLines: maxLines,
+          decoration: InputDecoration(
+            labelText: label,
+            labelStyle: AppTypography.bodyText.copyWith(
+              color: isDark ? Colors.white70 : Colors.black87,
+            ),
+            filled: true,
+            // Dark mode fill vs. light mode fill
+            fillColor: isDark ? const Color(0xFF1A1F2A) : Colors.grey[200],
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
+          style: AppTypography.bodyText.copyWith(
+            color: isDark ? Colors.white : Colors.black,
+          ),
+        );
+      },
+    );
+  }
+
+  // **Updated** to include the three FAQ items
+  Widget _buildFAQSection(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Column(
@@ -414,6 +441,7 @@ class LandingPage extends StatelessWidget {
 
           // FAQ 1
           _buildCustomExpansionTile(
+            context,
             title: RichText(
               text: TextSpan(
                 style: AppTypography.bodyText,
@@ -444,6 +472,7 @@ class LandingPage extends StatelessWidget {
 
           // FAQ 2
           _buildCustomExpansionTile(
+            context,
             title: RichText(
               text: TextSpan(
                 style: AppTypography.bodyText,
@@ -471,6 +500,7 @@ class LandingPage extends StatelessWidget {
 
           // FAQ 3
           _buildCustomExpansionTile(
+            context,
             title: RichText(
               text: TextSpan(
                 style: AppTypography.bodyText,
@@ -520,14 +550,22 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCustomExpansionTile({
+  // **Here is the updated method** with collapsed color settings
+  Widget _buildCustomExpansionTile(
+    BuildContext context, {
     required Widget title,
     required Widget content,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return ExpansionTile(
       title: title,
-      textColor: Colors.black,
-      iconColor: Colors.black,
+      // Expanded (open) colors
+      textColor: isDark ? Colors.white : Colors.black,
+      iconColor: isDark ? Colors.white : Colors.black,
+      // Collapsed (closed) colors
+      collapsedTextColor: isDark ? Colors.white : Colors.black,
+      collapsedIconColor: isDark ? Colors.white : Colors.black,
       children: [
         Padding(
           padding: const EdgeInsets.all(16),
@@ -537,95 +575,91 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFooterSection() {
+  Widget _buildFooterSection(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
+      // Unify the footer color with the main scaffold in dark mode
+      color: isDark ? const Color(0xFF0A0E1A) : Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-      decoration: BoxDecoration(
-        color: Colors.white, // Background color of the footer
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(24),
-          topRight: Radius.circular(24),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 2,
-            blurRadius: 10,
-            offset: const Offset(0, -2), // Shadow position
-          ),
-        ],
-      ),
       child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start, // Align content to the start
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Logo + Info
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Footer Logo on the left, slightly higher
               Padding(
-                padding:
-                    const EdgeInsets.only(top: 4.0), // Adjust the top padding
+                padding: const EdgeInsets.only(top: 4.0),
                 child: Image.asset(
                   'assets/images/Cardon_footer_logo.png',
                   height: 50,
                 ),
               ),
-              const SizedBox(width: 24), // Space between logo and other content
-
-              // Remaining footer content
+              const SizedBox(width: 24),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Company & Contact Info
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Left Column - Company Info
+                        // Left Column
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SelectableText(
                                 'Company',
-                                style: AppTypography.sectionTitle,
+                                style: AppTypography.sectionTitle.copyWith(
+                                  color: isDark ? Colors.white : Colors.black,
+                                ),
                               ),
                               const SizedBox(height: 16),
                               SelectableText.rich(
                                 TextSpan(
-                                  style: AppTypography.bodyText,
+                                  style: AppTypography.bodyText.copyWith(
+                                    color: isDark
+                                        ? Colors.white70
+                                        : Colors.black87,
+                                  ),
                                   children: [
                                     const TextSpan(text: 'Team '),
                                     TextSpan(
-                                      text: '🥇',
-                                      style: AppTypography.bodyTextEmoji,
-                                    ),
+                                        text: '🥇',
+                                        style: AppTypography.bodyTextEmoji),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 8),
                               SelectableText.rich(
                                 TextSpan(
-                                  style: AppTypography.bodyText,
+                                  style: AppTypography.bodyText.copyWith(
+                                    color: isDark
+                                        ? Colors.white70
+                                        : Colors.black87,
+                                  ),
                                   children: [
                                     const TextSpan(text: 'FAQ '),
                                     TextSpan(
-                                      text: '❓',
-                                      style: AppTypography.bodyTextEmoji,
-                                    ),
+                                        text: '❓',
+                                        style: AppTypography.bodyTextEmoji),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 8),
                               SelectableText.rich(
                                 TextSpan(
-                                  style: AppTypography.bodyText,
+                                  style: AppTypography.bodyText.copyWith(
+                                    color: isDark
+                                        ? Colors.white70
+                                        : Colors.black87,
+                                  ),
                                   children: [
                                     const TextSpan(text: 'About us '),
                                     TextSpan(
-                                      text: '🙋‍♂️',
-                                      style: AppTypography.bodyTextEmoji,
-                                    ),
+                                        text: '🙋‍♂️',
+                                        style: AppTypography.bodyTextEmoji),
                                   ],
                                 ),
                               ),
@@ -633,52 +667,65 @@ class LandingPage extends StatelessWidget {
                           ),
                         ),
 
-                        // Right Column - Contact Info
+                        const SizedBox(width: 16),
+
+                        // Right Column
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SelectableText(
                                 'Contact Us',
-                                style: AppTypography.sectionTitle,
+                                style: AppTypography.sectionTitle.copyWith(
+                                  color: isDark ? Colors.white : Colors.black,
+                                ),
                               ),
                               const SizedBox(height: 16),
                               SelectableText.rich(
                                 TextSpan(
-                                  style: AppTypography.bodyText,
+                                  style: AppTypography.bodyText.copyWith(
+                                    color: isDark
+                                        ? Colors.white70
+                                        : Colors.black87,
+                                  ),
                                   children: [
                                     const TextSpan(
                                         text: 'parsa.vafaei@torontomu.ca '),
                                     TextSpan(
-                                      text: '✉️',
-                                      style: AppTypography.bodyTextEmoji,
-                                    ),
+                                        text: '✉️',
+                                        style: AppTypography.bodyTextEmoji),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 8),
                               SelectableText.rich(
                                 TextSpan(
-                                  style: AppTypography.bodyText,
+                                  style: AppTypography.bodyText.copyWith(
+                                    color: isDark
+                                        ? Colors.white70
+                                        : Colors.black87,
+                                  ),
                                   children: [
                                     const TextSpan(text: '647-667-3708 '),
                                     TextSpan(
-                                      text: '☎️',
-                                      style: AppTypography.bodyTextEmoji,
-                                    ),
+                                        text: '☎️',
+                                        style: AppTypography.bodyTextEmoji),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 8),
                               SelectableText.rich(
                                 TextSpan(
-                                  style: AppTypography.bodyText,
+                                  style: AppTypography.bodyText.copyWith(
+                                    color: isDark
+                                        ? Colors.white70
+                                        : Colors.black87,
+                                  ),
                                   children: [
                                     const TextSpan(text: 'Online Chat '),
                                     TextSpan(
-                                      text: '💬',
-                                      style: AppTypography.bodyTextEmoji,
-                                    ),
+                                        text: '💬',
+                                        style: AppTypography.bodyTextEmoji),
                                   ],
                                 ),
                               ),
@@ -693,30 +740,46 @@ class LandingPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          const Divider(thickness: 1),
+          Divider(
+            thickness: 1,
+            color: isDark ? Colors.white24 : Colors.grey[300],
+          ),
           const SizedBox(height: 16),
+          // Footer Bottom Row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SelectableText(
                 '©Copyright by Cardon-AI. All rights reserved.',
-                style: AppTypography.bodyText.copyWith(fontSize: 12),
+                style: AppTypography.bodyText.copyWith(
+                  fontSize: 12,
+                  color: isDark ? Colors.white70 : Colors.black87,
+                ),
               ),
               Row(
                 children: [
                   SelectableText(
                     'Privacy Policy',
-                    style: AppTypography.bodyText.copyWith(fontSize: 12),
+                    style: AppTypography.bodyText.copyWith(
+                      fontSize: 12,
+                      color: isDark ? Colors.white70 : Colors.black87,
+                    ),
                   ),
                   const SizedBox(width: 16),
                   SelectableText(
                     'Terms of Use',
-                    style: AppTypography.bodyText.copyWith(fontSize: 12),
+                    style: AppTypography.bodyText.copyWith(
+                      fontSize: 12,
+                      color: isDark ? Colors.white70 : Colors.black87,
+                    ),
                   ),
                   const SizedBox(width: 16),
                   SelectableText(
                     'Legal',
-                    style: AppTypography.bodyText.copyWith(fontSize: 12),
+                    style: AppTypography.bodyText.copyWith(
+                      fontSize: 12,
+                      color: isDark ? Colors.white70 : Colors.black87,
+                    ),
                   ),
                 ],
               ),

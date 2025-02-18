@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppTypography {
+  // Base style without a fixed color, so it inherits from the theme
   static const TextStyle _baseStyle = TextStyle(
     fontSize: 16,
     height: 1.4,
     letterSpacing: 0,
-    color: Colors.black,
   );
 
   static TextStyle get header1 => _baseStyle.copyWith(
@@ -26,17 +26,18 @@ class AppTypography {
         letterSpacing: 0.2,
       );
 
-  static TextStyle get bodyTextEmoji => const TextStyle(
+  // Emoji style also inherits theme color
+  static TextStyle get bodyTextEmoji => _baseStyle.copyWith(
         fontFamily: 'NotoColorEmoji',
         fontSize: 16,
         height: 1.4,
-        letterSpacing: 0,
-        wordSpacing: 0,
-        color: Colors.black,
       );
+
+  // Nav button style can remain white if always needed,
+  // or we can rely on the theme by removing 'color: Colors.white'
   static TextStyle get navButton => _baseStyle.copyWith(
         fontSize: 16,
         fontWeight: FontWeight.w500,
-        color: Colors.white, // Adjust as needed for your button text color
+        color: Colors.white, // or remove if you want to inherit theme color
       );
 }

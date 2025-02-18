@@ -12,21 +12,24 @@ class FaqItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // We'll rely on the theme's bodyLarge or bodyMedium
     return ExpansionTile(
       title: Text(
         question,
-        style: const TextStyle(
-          fontWeight: FontWeight.w600,
-        ),
+        // Use theme-based text style for dynamic color
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
       ),
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Text(
             answer,
-            style: const TextStyle(
-              fontSize: 14,
-            ),
+            // Inherit from theme as well
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 14,
+                ),
           ),
         ),
       ],
