@@ -1,20 +1,13 @@
 import 'login_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/nav_button.dart';
-import '../styles/app_typography.dart'; // Add this import
+import '../styles/app_typography.dart';
 
-ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
+// Make themeNotifier a global variable to persist between page navigations
+final ValueNotifier<ThemeMode> themeNotifier = ValueNotifier(ThemeMode.light);
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
-
-  static const TextStyle _emojiStyle = TextStyle(
-    fontFamily: 'NotoColorEmoji',
-    fontSize: 18,
-    height: 1.2,
-    letterSpacing: 0.2,
-    wordSpacing: 1.0,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -23,149 +16,218 @@ class LandingPage extends StatelessWidget {
       builder: (context, currentTheme, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-
-          // ---------------------------
-          // Light Theme
-          // ---------------------------
+          
+          // Light Theme Configuration
           theme: ThemeData(
             brightness: Brightness.light,
             scaffoldBackgroundColor: Colors.white,
             primaryColor: Colors.black,
+            colorScheme: const ColorScheme.light(
+              primary: Colors.grey,
+              secondary: Colors.blue,
+              background: Colors.white,
+              surface: Colors.white,
+            ),
             textTheme: const TextTheme(
               bodyLarge: TextStyle(color: Colors.black),
               bodyMedium: TextStyle(color: Colors.black),
-              bodySmall: TextStyle(color: Colors.black),
+              bodySmall: TextStyle(color: Colors.black87),
               titleLarge: TextStyle(color: Colors.black),
-            ),
-          ),
-
-          // ---------------------------
-          // Dark Theme
-          // ---------------------------
-          darkTheme: ThemeData(
-            brightness: Brightness.dark,
-            scaffoldBackgroundColor: const Color(0xFF0A0E1A),
-            primaryColor: const Color(0xFFFFD700),
-            colorScheme: const ColorScheme.dark(
-              primary: Color(0xFFFFD700), // Gold
-              secondary: Color(0xFF03DAC6),
-              background: Color(0xFF0A0E1A),
-              surface: Color(0xFF141B2D),
-              onBackground: Color(0xFFECECEC),
-              onSurface: Color(0xFFECECEC),
-            ),
-            textTheme: const TextTheme(
-              bodyLarge: TextStyle(color: Colors.white),
-              bodyMedium: TextStyle(color: Colors.white),
-              bodySmall: TextStyle(color: Colors.white),
-              titleLarge: TextStyle(color: Colors.white),
-            ),
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Color(0xFF141B2D),
-              foregroundColor: Colors.white,
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFFD700),
-                foregroundColor: Color(0xFF0A0E1A),
+                backgroundColor: Colors.grey,
+                foregroundColor: Colors.white,
               ),
             ),
           ),
-
-          // Dynamically switch theme
+          
+          // Dark Theme Configuration
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            scaffoldBackgroundColor: const Color(0xFF0D1117),
+            primaryColor: Colors.grey[400],
+            colorScheme: ColorScheme.dark(
+              primary: Colors.grey[400]!,
+              secondary: Colors.grey[600]!,
+              background: Colors.grey[900]!,
+              surface: Colors.grey[800]!,
+            ),
+            textTheme: const TextTheme(
+              bodyLarge: TextStyle(color: Color(0xFFF0F6FC)),
+              bodyMedium: TextStyle(color: Color(0xFFF0F6FC)),
+              bodySmall: TextStyle(color: Color(0xFFC9D1D9)),
+              titleLarge: TextStyle(color: Color(0xFFF0F6FC)),
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 79, 90, 99),
+                foregroundColor: const Color(0xFF0D1117),
+              ),
+            ),
+            inputDecorationTheme: const InputDecorationTheme(
+              fillColor: Color(0xFF161B22),
+              labelStyle: TextStyle(color: Color(0xFFC9D1D9)),
+            ),
+            dividerColor: const Color(0xFF30363D),
+          ),
+          
+          // Set the current theme
           themeMode: currentTheme,
-
-          home: Scaffold(
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _buildNavBar(context),
-                    _buildHeaderSection(),
-                    _buildShowcaseSection(),
-                    _buildAboutSection(),
-                    _buildTeamSection(),
-                    _buildContactUsSection(),
-                    _buildFAQSection(context),
-                    _buildFooterSection(context),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          
+          home: const LandingPageContent(),
         );
       },
     );
   }
+}
 
+class LandingPageContent extends StatefulWidget {
+  const LandingPageContent({super.key});
+
+  @override
+  State<LandingPageContent> createState() => _LandingPageContentState();
+}
+
+class _LandingPageContentState extends State<LandingPageContent> {
+  final ScrollController _scrollController = ScrollController();
+  
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          child: Column(
+            children: [
+              _buildNavBar(context),
+              _buildHeroSection(context),
+              _buildFeaturesSection(context),
+              _buildAboutSection(context),
+              _buildTestimonialsSection(context),
+              _buildContactSection(context),
+              _buildFooterSection(context),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  
   Widget _buildNavBar(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Container(
-      // Use the same color as scaffold in dark mode for a seamless look
-      color: isDark ? const Color(0xFF0A0E1A) : Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+      color: isDark ? Theme.of(context).scaffoldBackgroundColor : Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Logo
-          Image.asset('assets/images/CARDON_AI_Logo.png', height: 40),
           Row(
             children: [
+              Icon(
+                Icons.assistant_rounded,
+                color: isDark ? Colors.grey[400] : Colors.grey,
+                size: 32,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Cardon-AI',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? Colors.white : Colors.black,
+                ),
+              ),
+            ],
+          ),
+          
+          // Navigation Links & Theme Toggle
+          Row(
+            children: [
+              // Navigation Links
+              _buildNavLink(context, 'Home', () {
+                _scrollController.animateTo(
+                  0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              }),
+              _buildNavLink(context, 'Features', () {
+                // Scroll to features section
+              }),
+              _buildNavLink(context, 'About', () {
+                // Scroll to about section
+              }),
+              _buildNavLink(context, 'Contact', () {
+                // Scroll to contact section
+              }),
+              
+              const SizedBox(width: 16),
+              
               // Theme Toggle Button
               Material(
-                color: isDark ? Colors.white : Colors.black,
-                borderRadius: BorderRadius.circular(8),
+                color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
                     // Toggle between light and dark
-                    themeNotifier.value =
-                        isDark ? ThemeMode.light : ThemeMode.dark;
+                    themeNotifier.value = isDark ? ThemeMode.light : ThemeMode.dark;
                   },
                   borderRadius: BorderRadius.circular(8),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 10,
-                    ),
-                    child: Text(
-                      isDark ? '🌞' : '🌙',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: isDark ? Colors.amber : Colors.white,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: isDark ? const Color(0xFF30363D) : Colors.grey[200],
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Icon(
+                        isDark ? Icons.light_mode : Icons.dark_mode,
+                        color: isDark ? Colors.blueGrey : Colors.blueGrey[800],
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: 8),
-              NavButton(label: 'About', onPressed: () {}),
-              NavButton(label: 'Team', onPressed: () {}),
-              NavButton(label: 'FAQ', onPressed: () {}),
+              
               const SizedBox(width: 16),
-              NavButton(
-                label: 'Log In',
+              
+              // Login Button
+              ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CardonLoginPage(),
-                    ),
-                  );
+                  // Navigate to login page
                 },
-                isPrimary: true,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: isDark ? const Color.fromARGB(255, 79, 90, 99) : Colors.grey,
+                  foregroundColor: isDark ? Colors.black : Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                ),
+                child: const Text('Login'),
               ),
+              
               const SizedBox(width: 8),
-              NavButton(
-                label: 'Sign Up',
+              
+              // Sign Up Button
+              ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CardonLoginPage(),
-                    ),
-                  );
+                  // Navigate to signup page
                 },
-                isPrimary: true,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: isDark ? const Color(0xFF58A6FF) : Colors.blue,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                ),
+                child: const Text('Sign Up'),
               ),
             ],
           ),
@@ -173,374 +235,130 @@ class LandingPage extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildHeaderSection() {
+  
+  Widget _buildNavLink(BuildContext context, String title, VoidCallback onTap) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 32),
-      child: SelectableText(
-        'Cardon-AI: The Assistant That Simplifies Your Life.',
-        textAlign: TextAlign.center,
-        style: AppTypography.header1,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(4),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+          child: Text(
+            title,
+            style: TextStyle(
+              color: isDark ? Colors.white : Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
       ),
     );
   }
-
-  Widget _buildShowcaseSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 48),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+  
+  Widget _buildHeroSection(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Container(
+      height: 500,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: isDark 
+            ? [const Color(0xFF1B222C), const Color(0xFF0D1117)]
+            : [Colors.grey.shade50, Colors.white],
+        ),
+      ),
+      child: Stack(
         children: [
-          Column(
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/macbook_icon.png',
-                    height: 250,
-                  ),
-                  Image.asset(
-                    'assets/images/image_inside_macbook.png',
-                    height: 220,
-                  ),
-                ],
+          // Background Pattern
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.1,
+              child: CustomPaint(
+                painter: GridPainter(isDark: isDark),
               ),
-            ],
-          ),
-          const SizedBox(width: 24),
-          Column(
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/iphone_icon.png',
-                    height: 220,
-                  ),
-                  Image.asset(
-                    'assets/images/image_inside_iphone.png',
-                    height: 200,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAboutSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 32),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SelectableText(
-            'About',
-            style: AppTypography.sectionTitle,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 32),
-          SelectableText.rich(
-            TextSpan(
-              style: AppTypography.bodyText,
-              children: [
-                const TextSpan(text: 'It all started with '),
-                TextSpan(
-                  text: '✨',
-                  style: AppTypography.bodyTextEmoji,
-                ),
-              ],
             ),
-            textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
-          SelectableText.rich(
-            TextSpan(
-              style: AppTypography.bodyText,
-              children: [
-                const TextSpan(
-                  text:
-                      '"What if we wrote our own weekly schedule and planner ',
-                ),
-                TextSpan(
-                  text: '📅',
-                  style: AppTypography.bodyTextEmoji,
-                ),
-                const TextSpan(text: '"'),
-              ],
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 16),
-          SelectableText.rich(
-            TextSpan(
-              style: AppTypography.bodyText,
-              children: [
-                const TextSpan(
-                  text:
-                      'Now Cardon-AI can not only help you manage your entire week, it can even act as your personal assistant and Pomodoro Timer.',
-                ),
-                TextSpan(
-                  text: '🤖',
-                  style: AppTypography.bodyTextEmoji,
-                ),
-              ],
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTeamSection() {
-    final teamMembers = [
-      {'image': 'assets/images/Arman.png', 'name': 'Arman'},
-      {'image': 'assets/images/Mahyar.png', 'name': 'Mahyar'},
-      {'image': 'assets/images/Parsa.png', 'name': 'Parsa'},
-      {'image': 'assets/images/Henrique.png', 'name': 'Henrique'},
-    ];
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SelectableText(
-            'Team',
-            style: AppTypography.sectionTitle,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: teamMembers.map((member) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundImage: AssetImage(member['image']!),
-                    ),
-                    const SizedBox(height: 8),
-                    SelectableText(
-                      member['name']!,
-                      style: AppTypography.bodyText,
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
-          const SizedBox(height: 32),
+          
+          // Content
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: SelectableText(
-              'We are four university students who decided to create a calendar, task manager, and Pomodoro tool all in one. Since the beginning, we have been striving for a best-in-class service. It is designed to help students and people like us stay organized and productive, with powerful features to make managing tasks easier and more efficient.',
-              style: AppTypography.bodyText,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildContactUsSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SelectableText(
-            'Contact Us',
-            style: AppTypography.sectionTitle,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 24),
-
-          // Name
-          _buildTextField('Full Name'),
-          const SizedBox(height: 16),
-
-          // Email
-          _buildTextField('Email'),
-          const SizedBox(height: 16),
-
-          // Message
-          _buildTextField('Message', maxLines: 5),
-          const SizedBox(height: 24),
-
-          ElevatedButton(
-            onPressed: () {
-              // Add functionality here
-            },
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              backgroundColor: Colors.orange,
-            ),
-            child: Text(
-              'Submit',
-              style: AppTypography.navButton,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // A helper that adjusts the fill color for dark mode
-  Widget _buildTextField(String label, {int maxLines = 1}) {
-    return Builder(
-      builder: (context) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
-        return TextField(
-          maxLines: maxLines,
-          decoration: InputDecoration(
-            labelText: label,
-            labelStyle: AppTypography.bodyText.copyWith(
-              color: isDark ? Colors.white70 : Colors.black87,
-            ),
-            filled: true,
-            // Dark mode fill vs. light mode fill
-            fillColor: isDark ? const Color(0xFF1A1F2A) : Colors.grey[200],
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide.none,
-            ),
-          ),
-          style: AppTypography.bodyText.copyWith(
-            color: isDark ? Colors.white : Colors.black,
-          ),
-        );
-      },
-    );
-  }
-
-  // **Updated** to include the three FAQ items
-  Widget _buildFAQSection(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SelectableText(
-            'FAQ',
-            style: AppTypography.sectionTitle,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 24),
-
-          // FAQ 1
-          _buildCustomExpansionTile(
-            context,
-            title: RichText(
-              text: TextSpan(
-                style: AppTypography.bodyText,
-                children: [
-                  const TextSpan(text: 'What is even Cardon-AI '),
-                  TextSpan(text: '🤓', style: AppTypography.bodyTextEmoji),
-                  const TextSpan(text: '?'),
-                ],
-              ),
-            ),
-            content: SelectableText.rich(
-              TextSpan(
-                children: [
-                  const TextSpan(text: 'Cardon-AI is your personal assistant '),
-                  TextSpan(text: '🤖', style: AppTypography.bodyTextEmoji),
-                  const TextSpan(
-                    text:
-                        '! You tell Cardon-AI how to make your weekly schedule and squeeze in a last-minute assignment, and it will take care of the rest ',
-                  ),
-                  TextSpan(text: '😊', style: AppTypography.bodyTextEmoji),
-                ],
-                style: AppTypography.bodyText,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          const SizedBox(height: 16),
-
-          // FAQ 2
-          _buildCustomExpansionTile(
-            context,
-            title: RichText(
-              text: TextSpan(
-                style: AppTypography.bodyText,
-                children: [
-                  const TextSpan(text: 'How can Cardon-AI help me? '),
-                  TextSpan(text: '🧑‍💻', style: AppTypography.bodyTextEmoji),
-                ],
-              ),
-            ),
-            content: SelectableText.rich(
-              TextSpan(
-                children: [
-                  const TextSpan(
-                    text:
-                        'Imagine having 2 assignments due this weekend, one presentation to prepare, three coffee chats you recently scheduled, and one family gathering to attend. Give it all to Cardon-AI and ease your mind ',
-                  ),
-                  TextSpan(text: '🍀', style: AppTypography.bodyTextEmoji),
-                ],
-                style: AppTypography.bodyText,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          const SizedBox(height: 16),
-
-          // FAQ 3
-          _buildCustomExpansionTile(
-            context,
-            title: RichText(
-              text: TextSpan(
-                style: AppTypography.bodyText,
-                children: [
-                  const TextSpan(text: 'What features does Cardon-AI have? '),
-                  TextSpan(text: '⚒️', style: AppTypography.bodyTextEmoji),
-                ],
-              ),
-            ),
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SelectableText.rich(
-                  TextSpan(
+                // Left Text Column
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const TextSpan(text: '- Pomodoro Timer '),
-                      TextSpan(text: '⌛', style: AppTypography.bodyTextEmoji),
+                      Text(
+                        'Your Intelligent\nPersonal Assistant',
+                        style: TextStyle(
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold,
+                          height: 1.2,
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        'Cardon-AI helps you manage your schedule, stay productive, and accomplish more with less stress.',
+                        style: TextStyle(
+                          fontSize: 18,
+                          height: 1.5,
+                          color: isDark ? Colors.grey[300] : Colors.grey[700],
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              // Get Started action
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: isDark ? const Color.fromARGB(255, 79, 90, 99) : Colors.grey,
+                              foregroundColor: isDark ? Colors.black : Colors.white,
+                              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                              textStyle: const TextStyle(fontSize: 16),
+                            ),
+                            child: const Text('Get Started'),
+                          ),
+                          const SizedBox(width: 16),
+                          TextButton.icon(
+                            onPressed: () {
+                              // Watch Demo action
+                            },
+                            icon: Icon(
+                              Icons.play_circle_outline,
+                              color: isDark ? const Color(0xFF58A6FF) : Colors.blue,
+                            ),
+                            label: Text(
+                              'Watch Demo',
+                              style: TextStyle(
+                                color: isDark ? const Color(0xFF58A6FF) : Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
-                    style: AppTypography.bodyText,
                   ),
                 ),
-                const SizedBox(height: 8),
-                SelectableText.rich(
-                  TextSpan(
-                    children: [
-                      const TextSpan(text: '- Interactive Personal Assistant '),
-                      TextSpan(text: '🤖', style: AppTypography.bodyTextEmoji),
-                    ],
-                    style: AppTypography.bodyText,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                SelectableText.rich(
-                  TextSpan(
-                    children: [
-                      const TextSpan(text: '- Progress Bar '),
-                      TextSpan(text: '📈', style: AppTypography.bodyTextEmoji),
-                    ],
-                    style: AppTypography.bodyText,
-                  ),
+                
+                const SizedBox(width: 48),
+                
+                // Right Image Column
+                Expanded(
+                  flex: 4,
+                  child: _buildHeroImage(isDark),
                 ),
               ],
             ),
@@ -549,189 +367,279 @@ class LandingPage extends StatelessWidget {
       ),
     );
   }
-
-  // **Here is the updated method** with collapsed color settings
-  Widget _buildCustomExpansionTile(
-    BuildContext context, {
-    required Widget title,
-    required Widget content,
-  }) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return ExpansionTile(
-      title: title,
-      // Expanded (open) colors
-      textColor: isDark ? Colors.white : Colors.black,
-      iconColor: isDark ? Colors.white : Colors.black,
-      // Collapsed (closed) colors
-      collapsedTextColor: isDark ? Colors.white : Colors.black,
-      collapsedIconColor: isDark ? Colors.white : Colors.black,
+  
+  Widget _buildHeroImage(bool isDark) {
+    return Stack(
+      alignment: Alignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: content,
+        // Shadow or background glow
+        Container(
+          height: 350,
+          width: 350,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: RadialGradient(
+              colors: isDark 
+                ? [const Color(0xFF58A6FF).withOpacity(0.2), Colors.transparent]
+                : [Colors.grey.withOpacity(0.2), Colors.transparent],
+              stops: const [0.2, 1.0],
+            ),
+          ),
+        ),
+        
+        // Main background circle
+        Container(
+          height: 300,
+          width: 300,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: isDark 
+                ? [const Color(0xFF1B222C), const Color(0xFF0D1117)]
+                : [Colors.white, Colors.grey.shade200],
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: isDark ? Colors.black.withOpacity(0.5) : Colors.grey.withOpacity(0.3),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+        ),
+        
+        // Icon in the center
+        Container(
+          height: 150,
+          width: 150,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: isDark 
+                ? [const Color.fromARGB(255, 79, 90, 99), const Color.fromARGB(255, 32, 64, 91)]
+                : [Colors.grey, Colors.grey.shade800],
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: isDark ? const Color.fromARGB(255, 79, 90, 99).withOpacity(0.3) : Colors.grey.withOpacity(0.3),
+                blurRadius: 30,
+                spreadRadius: 10,
+              ),
+            ],
+          ),
+          child: Icon(
+            Icons.assistant_rounded,
+            size: 80,
+            color: Colors.white,
+          ),
         ),
       ],
     );
   }
-
-  Widget _buildFooterSection(BuildContext context) {
+  
+  Widget _buildFeaturesSection(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    final features = [
+      {
+        'icon': Icons.schedule_rounded,
+        'title': 'Smart Scheduling',
+        'description': 'Automatically organize your weekly schedule with AI assistance.'
+      },
+      {
+        'icon': Icons.timer_rounded,
+        'title': 'Pomodoro Timer',
+        'description': 'Stay productive with built-in Pomodoro technique timers.'
+      },
+      {
+        'icon': Icons.smart_toy_rounded,
+        'title': 'AI Assistant',
+        'description': 'Get personalized recommendations and help managing tasks.'
+      },
+      {
+        'icon': Icons.bar_chart_rounded,
+        'title': 'Progress Tracking',
+        'description': 'Visualize your productivity and track task completion over time.'
+      },
+    ];
+    
     return Container(
-      // Unify the footer color with the main scaffold in dark mode
-      color: isDark ? const Color(0xFF0A0E1A) : Colors.white,
-      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 32),
+      color: isDark ? const Color(0xFF0D1117) : Colors.white,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Logo + Info
+          Text(
+            'Features',
+            style: TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : Colors.black,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Powerful tools to boost your productivity',
+            style: TextStyle(
+              fontSize: 18,
+              color: isDark ? Colors.grey[300] : Colors.grey[700],
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 64),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            children: features.map((feature) => 
+              Expanded(
+                child: _buildFeatureCard(
+                  context,
+                  icon: feature['icon'] as IconData,
+                  title: feature['title'] as String,
+                  description: feature['description'] as String,
+                ),
+              )
+            ).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildFeatureCard(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String description,
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: isDark ? const Color(0xFF161B22) : Colors.grey.shade50,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Icon(
+              icon,
+              size: 48,
+              color: isDark ? const Color.fromARGB(255, 79, 90, 99) : Colors.grey,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : Colors.black,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+          Text(
+            description,
+            style: TextStyle(
+              fontSize: 16,
+              color: isDark ? Colors.grey[300] : Colors.grey[700],
+              height: 1.5,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildAboutSection(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 32),
+      color: isDark ? const Color(0xFF161B22) : Colors.grey.shade50,
+      child: Column(
+        children: [
+          Text(
+            'About Cardon-AI',
+            style: TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : Colors.black,
+            ),
+          ),
+          const SizedBox(height: 48),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: Image.asset(
-                  'assets/images/Cardon_footer_logo.png',
-                  height: 50,
+              // Left side - Team Image
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Container(
+                    height: 350,
+                    color: isDark ? const Color(0xFF30363D) : Colors.grey[300],
+                    child: Center(
+                      child: Text(
+                        'Team Photo',
+                        style: TextStyle(
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              const SizedBox(width: 24),
+              
+              const SizedBox(width: 64),
+              
+              // Right side - Text
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Company & Contact Info
+                    Text(
+                      'Our Story',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      'We are four university students who decided to create a calendar, task manager, and Pomodoro tool all in one. Since the beginning, we have been striving for a best-in-class service.',
+                      style: TextStyle(
+                        fontSize: 16,
+                        height: 1.8,
+                        color: isDark ? Colors.grey[300] : Colors.grey[700],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'It is designed to help students and people like us stay organized and productive, with powerful features to make managing tasks easier and more efficient.',
+                      style: TextStyle(
+                        fontSize: 16,
+                        height: 1.8,
+                        color: isDark ? Colors.grey[300] : Colors.grey[700],
+                      ),
+                    ),
+                    const SizedBox(height: 32),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Left Column
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SelectableText(
-                                'Company',
-                                style: AppTypography.sectionTitle.copyWith(
-                                  color: isDark ? Colors.white : Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              SelectableText.rich(
-                                TextSpan(
-                                  style: AppTypography.bodyText.copyWith(
-                                    color: isDark
-                                        ? Colors.white70
-                                        : Colors.black87,
-                                  ),
-                                  children: [
-                                    const TextSpan(text: 'Team '),
-                                    TextSpan(
-                                        text: '🥇',
-                                        style: AppTypography.bodyTextEmoji),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              SelectableText.rich(
-                                TextSpan(
-                                  style: AppTypography.bodyText.copyWith(
-                                    color: isDark
-                                        ? Colors.white70
-                                        : Colors.black87,
-                                  ),
-                                  children: [
-                                    const TextSpan(text: 'FAQ '),
-                                    TextSpan(
-                                        text: '❓',
-                                        style: AppTypography.bodyTextEmoji),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              SelectableText.rich(
-                                TextSpan(
-                                  style: AppTypography.bodyText.copyWith(
-                                    color: isDark
-                                        ? Colors.white70
-                                        : Colors.black87,
-                                  ),
-                                  children: [
-                                    const TextSpan(text: 'About us '),
-                                    TextSpan(
-                                        text: '🙋‍♂️',
-                                        style: AppTypography.bodyTextEmoji),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
+                        _buildTeamMember(context, 'Arman', Icons.person),
                         const SizedBox(width: 16),
-
-                        // Right Column
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SelectableText(
-                                'Contact Us',
-                                style: AppTypography.sectionTitle.copyWith(
-                                  color: isDark ? Colors.white : Colors.black,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              SelectableText.rich(
-                                TextSpan(
-                                  style: AppTypography.bodyText.copyWith(
-                                    color: isDark
-                                        ? Colors.white70
-                                        : Colors.black87,
-                                  ),
-                                  children: [
-                                    const TextSpan(
-                                        text: 'parsa.vafaei@torontomu.ca '),
-                                    TextSpan(
-                                        text: '✉️',
-                                        style: AppTypography.bodyTextEmoji),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              SelectableText.rich(
-                                TextSpan(
-                                  style: AppTypography.bodyText.copyWith(
-                                    color: isDark
-                                        ? Colors.white70
-                                        : Colors.black87,
-                                  ),
-                                  children: [
-                                    const TextSpan(text: '647-667-3708 '),
-                                    TextSpan(
-                                        text: '☎️',
-                                        style: AppTypography.bodyTextEmoji),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              SelectableText.rich(
-                                TextSpan(
-                                  style: AppTypography.bodyText.copyWith(
-                                    color: isDark
-                                        ? Colors.white70
-                                        : Colors.black87,
-                                  ),
-                                  children: [
-                                    const TextSpan(text: 'Online Chat '),
-                                    TextSpan(
-                                        text: '💬',
-                                        style: AppTypography.bodyTextEmoji),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        _buildTeamMember(context, 'Mahyar', Icons.person),
+                        const SizedBox(width: 16),
+                        _buildTeamMember(context, 'Parsa', Icons.person),
+                        const SizedBox(width: 16),
+                        _buildTeamMember(context, 'Henrique', Icons.person),
                       ],
                     ),
                   ],
@@ -739,46 +647,437 @@ class LandingPage extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 24),
-          Divider(
-            thickness: 1,
-            color: isDark ? Colors.white24 : Colors.grey[300],
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildTeamMember(BuildContext context, String name, IconData icon) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Column(
+      children: [
+        CircleAvatar(
+          radius: 32,
+          backgroundColor: isDark ? const Color(0xFF30363D) : Colors.grey[300],
+          child: Icon(
+            icon,
+            size: 32,
+            color: isDark ? Colors.white : Colors.black,
           ),
-          const SizedBox(height: 16),
-          // Footer Bottom Row
+        ),
+        const SizedBox(height: 8),
+        Text(
+          name,
+          style: TextStyle(
+            color: isDark ? Colors.white : Colors.black,
+          ),
+        ),
+      ],
+    );
+  }
+  
+  Widget _buildTestimonialsSection(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    final testimonials = [
+      {
+        'text': 'Cardon-AI has completely changed how I manage my busy schedule. The AI suggestions are surprisingly accurate!',
+        'author': 'Sarah J.',
+        'role': 'Graduate Student'
+      },
+      {
+        'text': 'The Pomodoro feature helps me stay focused during long study sessions. I\'ve never been more productive.',
+        'author': 'Michael T.',
+        'role': 'Software Developer'
+      },
+      {
+        'text': 'I love how intuitive the interface is. Everything just makes sense, and the dark mode is easy on the eyes!',
+        'author': 'Alex W.',
+        'role': 'Project Manager'
+      },
+    ];
+    
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 32),
+      color: isDark ? const Color(0xFF0D1117) : Colors.white,
+      child: Column(
+        children: [
+          Text(
+            'What Our Users Say',
+            style: TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : Colors.black,
+            ),
+          ),
+          const SizedBox(height: 64),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: testimonials.map((testimonial) => 
+              Expanded(
+                child: _buildTestimonialCard(
+                  context,
+                  text: testimonial['text'] as String,
+                  author: testimonial['author'] as String,
+                  role: testimonial['role'] as String,
+                ),
+              )
+            ).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildTestimonialCard(
+    BuildContext context, {
+    required String text,
+    required String author,
+    required String role,
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: isDark ? const Color(0xFF161B22) : Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: isDark ? Colors.black.withOpacity(0.3) : Colors.grey.withOpacity(0.2),
+              blurRadius: 15,
+              offset: const Offset(0, 5),
+            ),
+          ],
+          border: Border.all(
+            color: isDark ? const Color(0xFF30363D) : Colors.grey.shade200,
+            width: 1,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              Icons.format_quote,
+              size: 36,
+              color: isDark ? const Color.fromARGB(255, 79, 90, 99) : Colors.grey,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 16,
+                height: 1.8,
+                color: isDark ? Colors.white : Colors.black,
+              ),
+            ),
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: isDark ? const Color(0xFF30363D) : Colors.grey[200],
+                  child: Icon(
+                    Icons.person,
+                    color: isDark ? Colors.white : Colors.black,
+                    size: 24,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      author,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    Text(
+                      role,
+                      style: TextStyle(
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  
+  Widget _buildContactSection(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 32),
+      color: isDark ? const Color(0xFF161B22) : Colors.grey.shade50,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Left Form Column
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Contact Us',
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Have questions or feedback? We\'d love to hear from you!',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: isDark ? Colors.grey[300] : Colors.grey[700],
+                  ),
+                ),
+                const SizedBox(height: 32),
+                _buildTextField(context, 'Name', Icons.person),
+                const SizedBox(height: 16),
+                _buildTextField(context, 'Email', Icons.email),
+                const SizedBox(height: 16),
+                _buildTextField(context, 'Message', Icons.message, maxLines: 5),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: () {
+                    // Submit form
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: isDark ? const Color.fromARGB(255, 79, 90, 99) : Colors.grey,
+                    foregroundColor: isDark ? Colors.black : Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  ),
+                  child: const Text('Send Message'),
+                ),
+              ],
+            ),
+          ),
+          
+          const SizedBox(width: 64),
+          
+          // Right Info Column
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Visit Us',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                _buildContactInfo(
+                  context,
+                  icon: Icons.email,
+                  title: 'Email',
+                  info: 'contact@cardon-ai.com',
+                ),
+                const SizedBox(height: 24),
+                _buildContactInfo(
+                  context,
+                  icon: Icons.phone,
+                  title: 'Phone',
+                  info: '+1 (647) 123-4567',
+                ),
+                const SizedBox(height: 24),
+                _buildContactInfo(
+                  context,
+                  icon: Icons.location_on,
+                  title: 'Address',
+                  info: '123 AI Drive\nToronto, ON M5V 1A1\nCanada',
+                ),
+                const SizedBox(height: 48),
+                Text(
+                  'Connect With Us',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    _buildSocialIcon(context, Icons.facebook),
+                    const SizedBox(width: 16),
+                    _buildSocialIcon(context, Icons.telegram),
+                    const SizedBox(width: 16),
+                    
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildTextField(
+    BuildContext context,
+    String label,
+    IconData icon, {
+    int maxLines = 1,
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return TextField(
+      maxLines: maxLines,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(
+          icon,
+          color: isDark ? Colors.grey[400] : Colors.grey[600],
+        ),
+        filled: true,
+        fillColor: isDark ? const Color(0xFF0D1117) : Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            color: isDark ? const Color(0xFF30363D) : Colors.grey.shade300,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            color: isDark ? const Color(0xFF30363D) : Colors.grey.shade300,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            color: isDark ? const Color.fromARGB(255, 79, 90, 99) : Colors.grey,
+            width: 2,
+          ),
+        ),
+        labelStyle: TextStyle(
+          color: isDark ? Colors.grey[400] : Colors.grey[600],
+        ),
+      ),
+    );
+  }
+  
+  Widget _buildContactInfo(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String info,
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: isDark ? const Color(0xFF0D1117) : Colors.white,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(
+            icon,
+            color: isDark ? const Color.fromARGB(255, 79, 90, 99) : Colors.grey,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: isDark ? Colors.white : Colors.black,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              info,
+              style: TextStyle(
+                color: isDark ? Colors.grey[300] : Colors.grey[700],
+                height: 1.5,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+  
+  Widget _buildSocialIcon(BuildContext context, IconData icon) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF0D1117) : Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isDark ? const Color(0xFF30363D) : Colors.grey.shade200,
+        ),
+      ),
+      child: Icon(
+        icon,
+        color: isDark ? Colors.grey[400] : Colors.grey,
+      ),
+    );
+  }
+  
+  Widget _buildFooterSection(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 32),
+      color: isDark ? const Color(0xFF0D1117) : Colors.white,
+      child: Column(
+        children: [
+          const Divider(color: Colors.grey),
+          const SizedBox(height: 32),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SelectableText(
-                '©Copyright by Cardon-AI. All rights reserved.',
-                style: AppTypography.bodyText.copyWith(
-                  fontSize: 12,
-                  color: isDark ? Colors.white70 : Colors.black87,
+              Text(
+                '© 2025 Cardon-AI. All rights reserved.',
+                style: TextStyle(
+                  color: isDark ? Colors.grey[400] : Colors.grey[600],
                 ),
               ),
               Row(
                 children: [
-                  SelectableText(
-                    'Privacy Policy',
-                    style: AppTypography.bodyText.copyWith(
-                      fontSize: 12,
-                      color: isDark ? Colors.white70 : Colors.black87,
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Privacy Policy',
+                      style: TextStyle(
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
+                      ),
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  SelectableText(
-                    'Terms of Use',
-                    style: AppTypography.bodyText.copyWith(
-                      fontSize: 12,
-                      color: isDark ? Colors.white70 : Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  SelectableText(
-                    'Legal',
-                    style: AppTypography.bodyText.copyWith(
-                      fontSize: 12,
-                      color: isDark ? Colors.white70 : Colors.black87,
+                  const SizedBox(width: 24),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Terms of Service',
+                      style: TextStyle(
+                        color: isDark ? Colors.grey[400] : Colors.grey[600],
+                      ),
                     ),
                   ),
                 ],
@@ -789,4 +1088,38 @@ class LandingPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class GridPainter extends CustomPainter {
+  final bool isDark;
+  
+  GridPainter({required this.isDark});
+  
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = isDark ? Colors.grey[800]! : Colors.grey[800]!
+      ..strokeWidth = 1;
+    
+    const spacing = 30.0;
+    
+    for (var i = 0; i < size.width.toInt(); i += spacing as int) {
+      canvas.drawLine(
+        Offset(i as double, 0),
+        Offset(i as double, size.height),
+        paint,
+      );
+    }
+    
+    for (var i = 0; i < size.height; i += spacing as int) {
+      canvas.drawLine(
+        Offset(0, i as double),
+        Offset(size.width, i as double),
+        paint,
+      );
+    }
+  }
+  
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
